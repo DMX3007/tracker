@@ -1,50 +1,85 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include <wchar.h>
 
-#define FNAME "./story.txt"
+#define FNAME "./story2.txt"
 #define TRUE 1
 #define FALSE 0
 
-int checkString(char* buffer) {
-    int len = 0;
-    len = strlen(buffer);
+int checkFlags(wint_t ch, int flag1, int flag2) {
+    int flag = 0;
+    // char mbstring[100] = {};
+    // const wchar_t wcstring[] = {"—"};
+    // size_t N = 1000;
 
-    if (len <= 1) {
-        return FALSE;
+    // int length = wcstombs(mbstring, wcstring, N);
+
+    // printf("hey");
+    // printf("%d", length);
+    // printf("%s", mbstring);
+    // printf("%ls", wcstring);
+
+    if (ch == ' ' && flag1 && flag2) {
+        return 3;
+    } else if (ch == "—" && flag1) {
+        return 2;
+    } else if (ch == ' ') {
+        return 1;
     }
-    return len;
+    return flag;
 }
 
-int checkFlags(int ch, int prev, int flag1, int flag2, int flag3) {
-    static int previous = 0;
-    int res = (ch == ' ') ? 1 : 0;
-    return res;
+void pasteSeparator(FILE* file) {
+    putc('"', file);
+    putc(':', file);
+    putc('"', file);
 }
 
-void parse(char* buffer) {
+int processing(int anyFlag, wint_t ch, int prev, int* flag1, int* flag2, int counter, FILE* wfile) {
+    static int innerCounter = 0;
+    anyFlag = checkFlags(ch, *flag1, *flag2);
+    if (anyFlag == 1) {
+        *flag1 = TRUE;
+        innerCounter = counter;
+        return 0;
+    }
+    if (flag1 && (anyFlag == 2) && (innerCounter + 1 == counter)) {
+        *flag2 = TRUE;
+        return 0;
+    }
+    if ((anyFlag == 3) && flag1 && flag2 && (innerCounter + 2 == counter)) {
+        pasteSeparator(wfile);
+        return 0;
+    } else {
+        *flag1 = FALSE;
+        *flag2 = FALSE;
+        putc(prev, wfile);
+        return 0;
+    }
+    putc(ch, wfile);
+}
+
+void parse(FILE* file, FILE* wfile) {
     int flag1 = 0;
     int flag2 = 0;
-    int flag3 = 0;
 
-    for (int i = 0; i < strlen(buffer); i++) {
-        int ch = 0;
-        if ((ch = getchar()) != EOF) {
-        }
+    wint_t ch = 0;
+    int prev = 0;
+    int anyFlag = 0;
+    int counter = 0;
+
+    while ((ch = fgetwc(file)) != WEOF) {
+        processing(anyFlag, ch, prev, &flag1, &flag2, counter, wfile);
+        counter++;
     }
-}
-
-char* createParsedString(char* buffer, int len) {
-    int check = checkString(buffer);
-    if (check != FALSE) {
-        // 2 chars: create additional 2 double quotes and colon and delete a separartor
-        char* str = (char*)malloc(len + 5 * sizeof(char));
-        }
 }
 
 FILE* writeToFile() {
     FILE* file = fopen("data.JSON", "rw");
+    if (file != NULL) {
+        printf("We are opened file.\n");
+    }
     return file;
 }
 
@@ -56,29 +91,21 @@ FILE* openFile() {
     return file;
 }
 
-char* readStrings() {
-    char* buffer = 0;
-    size_t bufsize = 1000;
-    size_t characters;
-
-    buffer = (char*)malloc(bufsize * sizeof(char));
-
+void prepare() {
     FILE* file = openFile();
+    FILE* writedFile = writeToFile();
 
-    if (file != NULL) {
-        printf("We get the file from function\n");
+    if (file != NULL && writedFile != NULL) {
+        printf("We open the files from function\n");
     }
-    do {
-        characters = getline(&buffer, &bufsize, file);
-        FILE* writedFile = writeToFile();
-        createParsedString(buffer, characters);
-    } while (characters != EOF);
 
-    printf("%s\n", buffer);
+    parse(file, writedFile);
+
     fclose(file);
+    fclose(writedFile);
 }
 
-int main(int argc, char* argv) {
-    readStrings();
+int main() {
+    prepare();
     return 0;
 }
