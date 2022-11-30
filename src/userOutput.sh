@@ -1,17 +1,17 @@
 
 showMessage () {
-    notify-send "$@" -i process-completed;
+    notify-send "$1" -i "$2";
 }
 
 showNotificaionMin() {
     if [[ "$1" -eq "$2" && seconds -eq 0 && hours -eq 0 ]]; then
-        showMessage "$3"
+        showMessage "$3" "$4"
     fi
 }
 
 showNotificaionHour() {
     if [[ "$1" -eq "$2" && minutes -eq 0 && seconds -eq 0 ]]; then
-        showMessage "$3"
+        showMessage "$3" "$4"
     fi
 }
 
@@ -26,7 +26,7 @@ export -f showNotificaionMin
 export -f showNotificaionHour
 export -f printOut
 
-showNotificaionMin $minutes 1 "$flag1"
+showNotificaionMin $minutes 1 "$flag1" "face-angel"
 showNotificaionMin $minutes 5 "$flag5"
 showNotificaionMin $minutes 15 "$flag15"
 showNotificaionMin $minutes 30 "$flag30"
