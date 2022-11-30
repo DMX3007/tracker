@@ -1,0 +1,58 @@
+.main {
+    padding: 10px;
+}
+
+.data {
+    padding: inherit;
+    background-color: gold;
+}
+
+.hidden {
+    opacity: 1;
+}
+
+.visible {
+    opacity: 0;
+}
+
+div {
+    display: inline-block;
+    border: 1px solid #333;
+}
+
+*/ .tile {
+    height: 100px;
+    width: 25%;
+    float: left;
+}
+
+p {
+    color: purple;
+    margin: 0.5em 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+canvas {
+    border: 1px solid black;
+}
+
+p {
+    color: purple;
+    margin: 0.5em 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button {
+    display: block;
+    margin: 20px 0 20px 20px;
+}
+
+.button-bar {
+    padding: 20px 0;
+}
