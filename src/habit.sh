@@ -85,6 +85,7 @@ while [ quit ]
         ((seconds+=${activities[$key]}))
     done
     
+    
     if [[ $seconds -eq 60 || $seconds -gt 60 ]]; then
         ((minutes+=1));
         sec=0;
