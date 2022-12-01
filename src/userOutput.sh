@@ -18,8 +18,8 @@ showNotificaionHour() {
 printOut() {
     printf "\nToday work time - $hours hours: $minutes min\n";
     date=$(date)
-    echo \""WORK_STOP"\"\:\""$date"\", >> story.txt
-    echo \}, >> story.txt
+    echo \""WORK_STOP"\"\:\""$date"\" >> story.txt
+    echo >> story.txt
     notify-send -i dialog-information "Today work time HOURS:$hours MINUTES:$minutes";
     exit
 }

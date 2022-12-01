@@ -37,13 +37,11 @@ check_date () {
     if [[ "$currentDate" -eq "$newDate" ]]; then
         source ./time.sh
         date=$(date)
-        echo \{ >> story.txt
         echo \""WORK_START"\"\:\""$date"\", >> story.txt
         get_time
     else
         echo "change date"
         date=$(date)
-        echo \{ >> story.txt
         echo \""WORK_START"\"\:\""$date"\", >> story.txt
         source ./time.sh
         set_time
