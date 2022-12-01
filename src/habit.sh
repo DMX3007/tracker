@@ -23,7 +23,8 @@ declare -A activities=(
 [react]=0 
 [smp]=0 
 [study]=0 
-[stack]=0 
+[stack]=0
+[хабр]=0
 [практикум]=0)
 
 export sec=0;
@@ -49,10 +50,10 @@ check_date () {
 }
 
 declare -A keyWords=(
-[Mozilla Firefox]="WEB"
-[Google Chrome]="WEB"
-[earielle@earielleDesc]="PC"
-[Visual Studio Code]="PC")
+[mozilla firefox]="WEB"
+[google chrome]="WEB"
+[earielle@earielledesc]="PC"
+[visual studio code]="PC")
 
 # ---- GREETINGS ---- 
 notify-send -i dialog-information "Highscore is $highscore"
@@ -66,7 +67,8 @@ quit=1
 while [ quit ]
     do
 
-    currentActivity=$(xdotool getwindowfocus getwindowname);
+    currentActivity=$(xdotool getwindowfocus getwindowname | tr '[:upper:]' '[:lower:]');
+    echo $currentActivity
 
     for key in "${!keyWords[@]}"; 
         do
