@@ -1,6 +1,6 @@
 
 showMessage () {
-    notify-send "$1" -i "$2";
+    notify-send -i "$1" "$2";
 }
 
 showNotificaionMin() {
@@ -26,35 +26,35 @@ export -f showNotificaionMin
 export -f showNotificaionHour
 export -f printOut
 
-showNotificaionMin $minutes 1 "$flag1" "face-angel"
-showNotificaionMin $minutes 5 "$flag5"
-showNotificaionMin $minutes 15 "$flag15"
-showNotificaionMin $minutes 30 "$flag30"
-showNotificaionMin $minutes 45 "$flag45"
-showNotificaionHour $hours 1 "$flag1h"
-showNotificaionHour $hours 2 "$flag2h"
-showNotificaionHour $hours 3 "$flag3h"
-showNotificaionHour $hours 4 "$flag4h"
-showNotificaionHour $hours 5 "$flag5h"
-showNotificaionHour $hours 6 "$flag6h"
-showNotificaionHour $hours 7 "$flag7h"
-showNotificaionHour $hours 8 "$flag8h"
-showNotificaionHour $hours 9 "$flag9h"
-showNotificaionHour $hours 10 "$flag10h"
-showNotificaionHour $hours 11 "$flag11h"
-showNotificaionHour $hours 12 "$flag12h"
-showNotificaionHour $hours 13 "$flag13h"
-showNotificaionHour $hours 14 "$flag14h"
-showNotificaionHour $hours 15 "$flag15h"
-showNotificaionHour $hours 16 "$flag16h"
-showNotificaionHour $hours 17 "$flag17h"
-showNotificaionHour $hours 18 "$flag18h"
-showNotificaionHour $hours 19 "$flag19h"
-showNotificaionHour $hours 20 "$flag20h"
-showNotificaionHour $hours 21 "$flag21h"
-showNotificaionHour $hours 22 "$flag22h"
-showNotificaionHour $hours 23 "$flag23h"
-showNotificaionHour $hours 24 "$flag24h"
+showNotificaionMin $minutes 1 "start-here" "$flag1" 
+showNotificaionMin $minutes 5 "face-wink" "$flag5"
+showNotificaionMin $minutes 15 "face-smirk" "$flag15" 
+showNotificaionMin $minutes 30 "face-cool" "$flag30" 
+showNotificaionMin $minutes 45 "face-angel" "$flag45" 
+showNotificaionHour $hours 1 "face-confused" "$flag1h" 
+showNotificaionHour $hours 2 "face-glasses" "$flag2h" 
+showNotificaionHour $hours 3 "emote-love" "$flag3h" 
+showNotificaionHour $hours 4 "face-devilish" "$flag4h" 
+showNotificaionHour $hours 5 "face-laugh" "$flag5h" 
+showNotificaionHour $hours 6 "face-smile-big" "$flag6h" 
+showNotificaionHour $hours 7 "face-surprise" "$flag7h" 
+showNotificaionHour $hours 8 "emblem-default" "$flag8h" 
+showNotificaionHour $hours 9 "face-surprise" "$flag9h" 
+showNotificaionHour $hours 10 "network-idle" "$flag10h" 
+showNotificaionHour $hours 11 "network-idle" "$flag11h" 
+showNotificaionHour $hours 12 "network-idle" "$flag12h" 
+showNotificaionHour $hours 13 "network-idle" "$flag13h" 
+showNotificaionHour $hours 14 "network-idle" "$flag14h" 
+showNotificaionHour $hours 15 "network-idle" "$flag15h" 
+showNotificaionHour $hours 16 "network-idle" "$flag16h" 
+showNotificaionHour $hours 17 "network-idle" "$flag17h" 
+showNotificaionHour $hours 18 "network-idle" "$flag18h" 
+showNotificaionHour $hours 19 "network-idle" "$flag19h" 
+showNotificaionHour $hours 20 "network-idle" "$flag20h" 
+showNotificaionHour $hours 21 "network-idle" "$flag21h" 
+showNotificaionHour $hours 22 "network-idle" "$flag22h" 
+showNotificaionHour $hours 23 "network-idle" "$flag23h" 
+showNotificaionHour $hours 24 "network-idle" "$flag24h" 
 
 # ---- CONTENT OF NOTIFICATION ----
 

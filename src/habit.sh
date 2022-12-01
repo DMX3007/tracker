@@ -30,7 +30,6 @@ export highscore=$(tail -1 ./userData.txt | awk {'print $1'});
 
 check_date () {
     newDate=$(tail -2 userData.txt | sed '$d' | awk '{print $1}');
-    echo $newDate
     if [[ "$currentDate" -eq "$newDate" ]]; then
         source ./time.sh
         get_time
@@ -64,7 +63,6 @@ while [ quit ]
         do
         if [[ "$currentActivity" == *"$key"* ]]; then
             platform="${keyWords[$key]}"
-            echo $currentProgramm
         fi
     done
 
@@ -96,7 +94,7 @@ while [ quit ]
         rm text.txt
     fi
     
-    if [[ $minutes -eq 60 ]]; then 
+    if [[ $minutes -eq 60 || $minutes -gt 60 ]]; then 
         ((hours+=1));
         minutes=0;
         if [[ $highscore < $hours ]]; then
@@ -107,5 +105,5 @@ while [ quit ]
 
     source ./userOutput.sh
 
-    sleep 1s;
+    sleep 0.99s;
     done
