@@ -1,27 +1,27 @@
-'use strict';
+"use strict";
 
-class Table {
-    constructor(activityValue, durationValue, barValue) {
-        this.activity = activityValue;
-        this.duration = durationValue;
-        this.bar = barValue;
-    }
-    makeRow() {
-        // Put the name of activity into the table;
-        const theme = `<th class="activity">${this.activity}</th> <td class="duration">${this.duration}</td><td class="bar">${this.bar}</td>`;
-        const place = document.querySelector('.table');
-        const column = place.insertAdjacentHTML('beforeend', theme);
-    };
-    createTable() {
-        this.makeRow();
-    };
-}
+// class Table {
+//     constructor(activityValue, durationValue, barValue) {
+//         this.activity = activityValue;
+//         this.duration = durationValue;
+//         this.bar = barValue;
+//     }
+//     makeRow() {
+//         // Put the name of activity into the table;
+//         const theme = `<th class="activity">${this.activity}</th> <td class="duration">${this.duration}</td><td class="bar">${this.bar}</td>`;
+//         const place = document.querySelector('.table');
+//         const column = place.insertAdjacentHTML('beforeend', theme);
+//     };
+//     createTable() {
+//         this.makeRow();
+//     };
+// }
 
-const positive = ['anki', 'bash', 'code', 'css', 'edclub', 'git', 'habr', 'html', 'javascript', 'js', 'learn', 'leetcode', 'mdn', 'programming', 'react', 'smp', 'study', 'stack', 'практикум',];
+// const positive = ['anki', 'bash', 'code', 'css', 'edclub', 'git', 'habr', 'html', 'javascript', 'js', 'learn', 'leetcode', 'mdn', 'programming', 'react', 'smp', 'study', 'stack', 'практикум',];
 
-function splitFile(content) {
-    return content.split("\n");
-}
+// function splitFile(content) {
+//     return content.split("\n");
+// }
 
 // function (array) {
 //     kol - vo el v massive; length;
@@ -43,14 +43,12 @@ function splitFile(content) {
 //     }
 // }
 
+// readFile();
+// console.log(arr)
+// const table = new Table("activity", 2, "hello");
 
-readFile();
-console.log(arr)
-const table = new Table("activity", 2, "hello");
-
-
-// Tasks: 
-// 1. [anki]=0 
+// Tasks:
+// 1. [anki]=0
 // [bash] = 0
 // [code] = 0
 // [css] = 0
@@ -75,3 +73,14 @@ const table = new Table("activity", 2, "hello");
 //      1.1 Get the amount of positive strings;
 //      1.2 Get the amount of wasted strings;
 //      Display it;
+
+async function getData() {
+  const data = await fetch("http://localhost:8080/src/story.txt");
+  return data.text();
+}
+
+(async () => {
+  const str = await getData();
+
+  console.log(str.split("Code").length - 1);
+})();

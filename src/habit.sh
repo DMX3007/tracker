@@ -1,10 +1,8 @@
 #!/bin/bash
 
-export sec=0;
-export minutes=0;
-export hours=0;
 export platform="null";
 declare -A activities=(
+[127.0.0.1]=0
 [anki]=0 
 [bash]=0 
 [code]=0 
@@ -14,7 +12,10 @@ declare -A activities=(
 [habr]=0 
 [html]=0 
 [javascript]=0 
-[js]=0 
+[js]=0
+[json]=0
+[q & a]=0
+[valid]=0
 [learn]=0 
 [leetcode]=0 
 [mdn]=0 
@@ -25,14 +26,27 @@ declare -A activities=(
 [stack]=0 
 [практикум]=0)
 
+export sec=0;
+export minutes=0;
+export hours=0;
+export highscore=$(head -2 config.txt | sed '1d');
 export currentDate=$(date +%j);
-export highscore=$(tail -1 ./userData.txt | awk {'print $1'});
+export newDate=$(head -1 config.txt);
 
 check_date () {
-    newDate=$(tail -2 userData.txt | sed '$d' | awk '{print $1}');
     if [[ "$currentDate" -eq "$newDate" ]]; then
         source ./time.sh
+        date=$(date)
+        echo \{ >> story.txt
+        echo \""WORK_START"\"\:\""$date"\", >> story.txt
         get_time
+    else
+        echo "change date"
+        date=$(date)
+        echo \{ >> story.txt
+        echo \""WORK_START"\"\:\""$date"\", >> story.txt
+        source ./time.sh
+        set_time
     fi
 }
 
@@ -41,7 +55,6 @@ declare -A keyWords=(
 [Google Chrome]="WEB"
 [earielle@earielleDesc]="PC"
 [Visual Studio Code]="PC")
-
 
 # ---- GREETINGS ---- 
 notify-send -i dialog-information "Highscore is $highscore"
@@ -54,8 +67,6 @@ quit=1
     
 while [ quit ]
     do
-    source ./time.sh
-    set_time
 
     currentActivity=$(xdotool getwindowfocus getwindowname);
 
@@ -66,9 +77,8 @@ while [ quit ]
         fi
     done
 
-    echo \""$platform"\"\:\""$currentActivity"\" >> text.txt
+    echo \""$platform"\"\:\""$currentActivity"\", >> text.txt
     platform="";
-
 
     for key in "${!activities[@]}";
         do
@@ -89,8 +99,6 @@ while [ quit ]
         sec=0;
         seconds=0;
         cat text.txt >> story.txt
-        echo "$currentDate" > userData.txt
-        echo "$highscore" > userData.txt
         rm text.txt
     fi
     
@@ -104,6 +112,7 @@ while [ quit ]
     fi
 
     source ./userOutput.sh
-
-    sleep 0.99s;
+    source ./time.sh
+    set_time
+    sleep 0.9999999999999999999999999999999999s;
     done
